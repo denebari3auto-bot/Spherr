@@ -1,9 +1,27 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Access environment variables with fallbacks to prevent crashes if undefined
-// Note: In a real app, you would want proper error handling if these are missing.
-const supabaseUrl = typeof process !== 'undefined' && process.env.SUPABASE_URL ? process.env.SUPABASE_URL : 'https://placeholder.supabase.co';
-const supabaseAnonKey = typeof process !== 'undefined' && process.env.SUPABASE_ANON_KEY ? process.env.SUPABASE_ANON_KEY : 'placeholder';
+// Safe environment variable accessor to prevent runtime crashes in browsers
+const getEnv = (key: string) => {
+  try {
+    // Check for standard process.env (Node/Bundlers)
+    if (typeof process !== 'undefined' && process.env && process.env[key]) {
+      return process.env[key];
+    }
+    // Check for Vite-style import.meta.env
+    // @ts-ignore
+    if (typeof import.meta !== 'undefined' && import.meta.env && import.meta.env[key]) {
+      // @ts-ignore
+      return import.meta.env[key];
+    }
+  } catch (e) {
+    // Ignore errors in strict environments
+  }
+  return '';
+};
 
-// Create a single supabase client for interacting with your database
+// Use retrieved keys or fallbacks. 
+// NOTE: For a real production app, ensure your build tool injects these keys.
+const supabaseUrl = getEnv('SUPABASE_URL') || 'https://placeholder.supabase.co';
+const supabaseAnonKey = getEnv('SUPABASE_ANON_KEY') || 'placeholder';
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey);

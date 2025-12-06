@@ -32,6 +32,8 @@ export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => 
             src="https://i.imgur.com/k5XnwFl.jpeg" 
             alt="Enterprise System Background" 
             className="w-full h-full object-cover opacity-50 saturate-150"
+            loading="eager" 
+            fetchPriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-[#050b1a] via-[#050b1a]/70 to-[#050b1a]"></div>
       </div>
