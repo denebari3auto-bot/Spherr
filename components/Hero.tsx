@@ -1,179 +1,235 @@
-import React from 'react';
-import { ArrowRight, Activity, Zap, BarChart3, Globe } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowRight, Terminal, Shield, Globe, Search, MoreHorizontal, Bell, User, Layout, Activity } from 'lucide-react';
 import { Button } from './Button';
 
-export const Hero: React.FC = () => {
-  return (
-    <div className="relative pt-32 pb-20 overflow-hidden bg-slate-950">
-      {/* Background Gradients */}
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px] pointer-events-none animate-pulse-slow"></div>
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] pointer-events-none"></div>
+interface HeroProps {
+    onRequestDemo?: () => void;
+    onContactSales?: () => void;
+}
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => {
+  const [visibleWords, setVisibleWords] = useState<number>(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setVisibleWords(prev => (prev < 4 ? prev + 1 : prev));
+    }, 800); // Reveal next word every 800ms
+    return () => clearInterval(interval);
+  }, []);
+
+  const taglineWords = [
+    { text: "Redefined", color: "text-indigo-400", suffix: ", " },
+    { text: "Simplified", color: "text-blue-400", suffix: ", " },
+    { text: "Optimised", color: "text-green-400", suffix: " " },
+    { text: "Unleashed", color: "text-gold-400", prefix: "& ", suffix: "" },
+  ];
+
+  return (
+    <div className="relative pt-32 pb-24 overflow-hidden bg-[#050b1a] min-h-[90vh] flex flex-col justify-center">
+      {/* Enterprise System Background - No Blur */}
+      <div className="absolute inset-0 z-0">
+          <img 
+            src="https://i.imgur.com/k5XnwFl.jpeg" 
+            alt="Enterprise System Background" 
+            className="w-full h-full object-cover opacity-50 saturate-150"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#050b1a] via-[#050b1a]/70 to-[#050b1a]"></div>
+      </div>
+
+      {/* Bright & Calming Gradients */}
+      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen z-0"></div>
+      <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen z-0"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
           {/* Text Content */}
-          <div className="space-y-8 animate-fade-in">
-            <div className="inline-flex items-center space-x-2 bg-slate-900/50 backdrop-blur-sm rounded-full px-4 py-1.5 border border-slate-800 hover:border-indigo-500/50 transition-colors cursor-pointer">
-              <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-sm font-medium text-slate-300">Spherr Enterprise 2.0 is Live</span>
-            </div>
+          <div className="space-y-8 animate-fade-in text-center lg:text-left">
             
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-tight">
-              Orchestrate your <br/>
-              <span className="gradient-text">Business Intelligence</span>
+            <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-2xl">
+              Automation <br/>
+              <span className="block mt-2 h-auto">
+                {taglineWords.map((word, index) => (
+                  <span 
+                    key={index} 
+                    className={`transition-all duration-700 inline-block ${visibleWords > index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+                  >
+                    {word.prefix && <span className="text-white mr-2">{word.prefix}</span>}
+                    <span className={word.color}>{word.text}</span>
+                    <span className="text-white mr-2">{word.suffix}</span>
+                  </span>
+                ))}
+              </span>
             </h1>
             
-            <p className="text-lg text-slate-400 leading-relaxed max-w-lg">
-              The market leader in AI-powered business automation for SMEs. 
+            <p className="text-xl text-slate-300 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
+              The market leader in AI-powered business automation. 
               Build custom AI agents, streamline workflows, and visualize your entire enterprise in one unified ecosystem.
             </p>
             
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
-              <Button size="lg" variant="glow">
-                Start Building <ArrowRight className="ml-2 h-5 w-5" />
+            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
+              <Button 
+                size="lg" 
+                className="bg-gold-400 text-slate-950 hover:bg-gold-500 border-none font-bold shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all hover:scale-105"
+                onClick={onRequestDemo}
+              >
+                Request Demo <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
-              <Button variant="secondary" size="lg">
-                View Documentation
+              <Button 
+                variant="secondary" 
+                size="lg" 
+                className="bg-white/5 backdrop-blur-md text-white border-white/10 hover:bg-white/10 font-semibold"
+                onClick={onContactSales}
+              >
+                Contact Sales
               </Button>
             </div>
-          </div>
-
-          {/* Dashboard Visual */}
-          <div className="relative perspective-[2000px] group">
-            <div className="absolute -inset-1 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000"></div>
             
-            <div className="relative bg-slate-950 rounded-2xl border border-slate-800 shadow-2xl overflow-hidden transform transition-transform duration-500 group-hover:rotate-x-1 group-hover:scale-[1.01]">
-              {/* Fake Browser Bar */}
-              <div className="bg-slate-900 border-b border-slate-800 px-4 py-3 flex items-center justify-between">
-                <div className="flex space-x-2">
-                  <div className="w-3 h-3 rounded-full bg-red-500/20"></div>
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/20"></div>
-                  <div className="w-3 h-3 rounded-full bg-green-500/20"></div>
-                </div>
-                <div className="bg-slate-950 rounded text-xs text-slate-500 px-3 py-1 font-mono">dashboard.spherr.ai</div>
-                <div className="w-4"></div>
-              </div>
-
-              {/* Dashboard Content */}
-              <div className="p-6 grid grid-cols-12 gap-4 h-[420px]">
-                
-                {/* Sidebar */}
-                <div className="col-span-3 space-y-2 border-r border-slate-800 pr-4">
-                   <div className="h-8 bg-indigo-600/20 border border-indigo-500/30 rounded-lg w-full flex items-center px-2 space-x-2">
-                      <div className="w-4 h-4 rounded bg-indigo-500"></div>
-                      <div className="w-16 h-2 bg-slate-700 rounded"></div>
-                   </div>
-                   {[1,2,3,4].map(i => (
-                      <div key={i} className="h-8 hover:bg-slate-800/50 rounded-lg w-full flex items-center px-2 space-x-2 transition-colors cursor-pointer">
-                        <div className="w-4 h-4 rounded bg-slate-700"></div>
-                        <div className="w-12 h-2 bg-slate-800 rounded"></div>
-                      </div>
-                   ))}
-                   
-                   <div className="mt-8 pt-4 border-t border-slate-800">
-                      <div className="bg-slate-900 rounded-xl p-3 border border-slate-800 relative overflow-hidden">
-                        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-indigo-500 to-transparent animate-slide-up"></div>
-                        <div className="text-xs text-slate-400 mb-1">System Status</div>
-                        <div className="text-green-400 text-xs font-bold flex items-center">
-                           <Activity className="w-3 h-3 mr-1" /> Operational
-                        </div>
-                      </div>
-                   </div>
-                </div>
-
-                {/* Main Area */}
-                <div className="col-span-9 space-y-4">
-                  {/* Top Stats */}
-                  <div className="grid grid-cols-3 gap-4">
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800 relative group overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                      <div className="flex justify-between items-start mb-2">
-                        <p className="text-xs text-slate-500">Active Agents</p>
-                        <Zap className="w-4 h-4 text-indigo-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-white flex items-end space-x-2">
-                        <span>24</span>
-                        <span className="text-xs text-green-500 mb-1">+3 today</span>
-                      </div>
-                    </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                      <div className="flex justify-between items-start mb-2">
-                        <p className="text-xs text-slate-500">Processed Tasks</p>
-                        <Activity className="w-4 h-4 text-purple-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-white">14.2k</div>
-                    </div>
-                    <div className="bg-slate-900 p-4 rounded-xl border border-slate-800">
-                      <div className="flex justify-between items-start mb-2">
-                        <p className="text-xs text-slate-500">Efficiency</p>
-                        <BarChart3 className="w-4 h-4 text-green-400" />
-                      </div>
-                      <div className="text-2xl font-bold text-white">94%</div>
-                    </div>
-                  </div>
-
-                  {/* Main Chart Area */}
-                  <div className="bg-slate-900 rounded-xl border border-slate-800 p-4 h-48 relative overflow-hidden flex flex-col justify-end">
-                     <div className="absolute top-4 left-4 flex space-x-2">
-                        <div className="px-2 py-1 rounded bg-slate-800 text-[10px] text-slate-400">Traffic</div>
-                        <div className="px-2 py-1 rounded bg-slate-800 text-[10px] text-slate-400">Load</div>
-                     </div>
-                     
-                     <div className="flex items-end justify-between space-x-1 h-32 px-2">
-                        {[35, 45, 30, 60, 75, 50, 65, 80, 70, 90, 85, 95, 60, 70, 80, 100].map((h, i) => (
-                           <div 
-                              key={i} 
-                              className="w-full bg-indigo-500/20 hover:bg-indigo-500 rounded-t transition-all duration-300"
-                              style={{ 
-                                height: `${h}%`,
-                                animation: `pulse 2s infinite ${i * 0.1}s` 
-                              }}
-                           ></div>
-                        ))}
-                     </div>
-                     {/* Overlay Line */}
-                     <div className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none">
-                        <svg className="w-full h-full" viewBox="0 0 100 100" preserveAspectRatio="none">
-                           <path d="M0 100 L0 60 L10 50 L20 70 L30 40 L40 50 L50 20 L60 40 L70 30 L80 15 L90 25 L100 5 V100 H0 Z" fill="url(#gradient)" opacity="0.2" />
-                           <path d="M0 60 L10 50 L20 70 L30 40 L40 50 L50 20 L60 40 L70 30 L80 15 L90 25 L100 5" fill="none" stroke="#6366f1" strokeWidth="0.5" vectorEffect="non-scaling-stroke" />
-                           <defs>
-                              <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                 <stop offset="0%" stopColor="#6366f1" />
-                                 <stop offset="100%" stopColor="transparent" />
-                              </linearGradient>
-                           </defs>
-                        </svg>
-                     </div>
-                  </div>
-
-                  {/* Active Process List */}
-                  <div className="grid grid-cols-2 gap-4">
-                     <div className="bg-slate-900 rounded-xl border border-slate-800 p-3 flex items-center space-x-3">
-                        <div className="bg-green-500/20 p-2 rounded-lg">
-                           <Globe className="w-4 h-4 text-green-500 animate-spin-slow" />
-                        </div>
-                        <div>
-                           <div className="text-xs text-white font-medium">Data Sync</div>
-                           <div className="text-[10px] text-slate-500">Running • 2ms latency</div>
-                        </div>
-                     </div>
-                     <div className="bg-slate-900 rounded-xl border border-slate-800 p-3 flex items-center space-x-3">
-                        <div className="bg-blue-500/20 p-2 rounded-lg">
-                           <Zap className="w-4 h-4 text-blue-500" />
-                        </div>
-                        <div>
-                           <div className="text-xs text-white font-medium">AI Agent #8</div>
-                           <div className="text-[10px] text-slate-500">Thinking...</div>
-                        </div>
-                     </div>
-                  </div>
-
-                </div>
-              </div>
+            {/* Tech Stack Hints */}
+            <div className="pt-8 flex items-center justify-center lg:justify-start space-x-8 text-slate-400 text-sm font-semibold">
+                <span className="flex items-center hover:text-indigo-400 transition-colors cursor-default"><Terminal className="w-4 h-4 mr-2" /> API First</span>
+                <span className="flex items-center hover:text-green-400 transition-colors cursor-default"><Shield className="w-4 h-4 mr-2" /> SOC2 Secure</span>
+                <span className="flex items-center hover:text-blue-400 transition-colors cursor-default"><Globe className="w-4 h-4 mr-2" /> Global Scale</span>
             </div>
           </div>
 
+          {/* High-Fidelity Realistic Interface Demo */}
+          <div className="relative group hidden lg:block h-[650px] perspective-[2000px]">
+             {/* Floating Container */}
+             <div className="relative w-full h-full transform transition-all duration-1000">
+                
+                {/* Glow Effect behind dashboard */}
+                <div className="absolute -inset-10 bg-gradient-to-tr from-indigo-500/20 via-purple-500/10 to-gold-500/20 rounded-[3rem] blur-3xl opacity-60 animate-pulse-slow"></div>
+                
+                {/* Main Dashboard Window */}
+                <div className="relative bg-[#0b1221]/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl overflow-hidden h-[90%] w-full flex flex-col mx-auto ring-1 ring-white/5">
+                    
+                    {/* Window Header */}
+                    <div className="bg-[#0f172a] border-b border-white/5 h-12 px-4 flex items-center justify-between shrink-0">
+                        <div className="flex space-x-2">
+                            <div className="w-3 h-3 rounded-full bg-[#ff5f57] border border-black/20"></div>
+                            <div className="w-3 h-3 rounded-full bg-[#febc2e] border border-black/20"></div>
+                            <div className="w-3 h-3 rounded-full bg-[#28c840] border border-black/20"></div>
+                        </div>
+                        <div className="bg-slate-900 rounded-md text-[11px] text-slate-400 px-4 py-1.5 font-mono flex items-center border border-white/5 shadow-inner">
+                           <Shield className="w-3 h-3 mr-2 text-gold-400" />
+                           admin.spherr.ai/dashboard
+                        </div>
+                        <div className="flex space-x-4 items-center">
+                            <div className="flex items-center text-xs text-green-400 bg-green-500/10 px-2 py-1 rounded">
+                                <div className="w-1.5 h-1.5 rounded-full bg-green-500 mr-2 animate-pulse"></div>
+                                Live
+                            </div>
+                            <Bell className="w-4 h-4 text-slate-400" />
+                            <div className="w-7 h-7 rounded-full bg-gradient-to-r from-indigo-500 to-purple-500 flex items-center justify-center text-[10px] text-white font-bold shadow-lg">S</div>
+                        </div>
+                    </div>
+
+                    {/* App Content */}
+                    <div className="flex flex-1 overflow-hidden">
+                        
+                        {/* Sidebar */}
+                        <div className="w-20 bg-[#0f172a]/50 border-r border-white/5 flex flex-col items-center py-6 space-y-8">
+                            <div className="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20"><Layout className="w-5 h-5 text-white" /></div>
+                            <div className="w-10 h-10 rounded-xl hover:bg-white/5 flex items-center justify-center text-slate-500 transition-colors"><Globe className="w-5 h-5" /></div>
+                            <div className="w-10 h-10 rounded-xl hover:bg-white/5 flex items-center justify-center text-slate-500 transition-colors"><Activity className="w-5 h-5" /></div>
+                            <div className="w-10 h-10 rounded-xl hover:bg-white/5 flex items-center justify-center text-slate-500 transition-colors"><Search className="w-5 h-5" /></div>
+                        </div>
+
+                        {/* Main View */}
+                        <div className="flex-1 bg-transparent p-8 overflow-hidden flex flex-col font-sans">
+                            {/* Dashboard Header */}
+                            <div className="flex justify-between items-end mb-8">
+                                <div>
+                                    <h2 className="text-2xl font-bold text-white mb-1">Executive Overview</h2>
+                                    <p className="text-xs text-slate-400 font-medium">Real-time enterprise metrics • <span className="text-indigo-400">Updated 2s ago</span></p>
+                                </div>
+                                <div className="flex space-x-3">
+                                    <button className="px-3 py-1.5 bg-white/5 hover:bg-white/10 border border-white/10 text-white text-xs rounded-lg font-medium transition-colors">Customize</button>
+                                    <button className="px-3 py-1.5 bg-indigo-600 hover:bg-indigo-500 text-white text-xs rounded-lg font-medium shadow-lg shadow-indigo-500/25 transition-all">Generate Report</button>
+                                </div>
+                            </div>
+
+                            {/* Stats Cards */}
+                            <div className="grid grid-cols-3 gap-6 mb-8">
+                                <div className="bg-[#1e293b]/40 backdrop-blur-sm border border-white/5 p-5 rounded-2xl relative overflow-hidden group hover:bg-[#1e293b]/60 transition-colors">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Activity className="w-12 h-12 text-white" /></div>
+                                    <div className="text-xs text-slate-400 font-medium mb-2 uppercase tracking-wide">Total Revenue</div>
+                                    <div className="text-2xl font-bold text-white mb-2">$24,500.20</div>
+                                    <div className="inline-flex items-center text-[10px] text-green-400 bg-green-500/10 px-2 py-0.5 rounded-full">+12.5% vs last week</div>
+                                </div>
+                                <div className="bg-[#1e293b]/40 backdrop-blur-sm border border-white/5 p-5 rounded-2xl relative overflow-hidden group hover:bg-[#1e293b]/60 transition-colors">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><User className="w-12 h-12 text-indigo-400" /></div>
+                                    <div className="text-xs text-slate-400 font-medium mb-2 uppercase tracking-wide">Active Agents</div>
+                                    <div className="text-2xl font-bold text-white mb-2">142</div>
+                                    <div className="inline-flex items-center text-[10px] text-indigo-300 bg-indigo-500/10 px-2 py-0.5 rounded-full">All systems operational</div>
+                                </div>
+                                <div className="bg-[#1e293b]/40 backdrop-blur-sm border border-white/5 p-5 rounded-2xl relative overflow-hidden group hover:bg-[#1e293b]/60 transition-colors">
+                                    <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity"><Bell className="w-12 h-12 text-gold-400" /></div>
+                                    <div className="text-xs text-slate-400 font-medium mb-2 uppercase tracking-wide">System Health</div>
+                                    <div className="text-2xl font-bold text-white mb-2">99.99%</div>
+                                    <div className="inline-flex items-center text-[10px] text-gold-400 bg-gold-500/10 px-2 py-0.5 rounded-full">No incidents reported</div>
+                                </div>
+                            </div>
+
+                            {/* Main Chart Section */}
+                            <div className="flex-1 bg-[#1e293b]/30 border border-white/5 rounded-2xl p-6 relative overflow-hidden flex flex-col shadow-inner">
+                                <div className="flex justify-between mb-6">
+                                    <div className="flex items-center space-x-2">
+                                        <h3 className="text-sm font-semibold text-white">Traffic Analysis</h3>
+                                        <span className="text-[10px] text-slate-500 border border-white/5 px-2 py-0.5 rounded">Live View</span>
+                                    </div>
+                                    <MoreHorizontal className="w-4 h-4 text-slate-500 cursor-pointer hover:text-white" />
+                                </div>
+                                
+                                <div className="flex-1 flex items-end space-x-3 px-2 pb-2">
+                                    {[30, 45, 35, 60, 50, 75, 60, 80, 70, 90, 85, 95, 75, 85, 65, 55, 70, 80].map((h, i) => (
+                                        <div key={i} className="flex-1 bg-gradient-to-t from-indigo-600/20 to-indigo-500/40 rounded-t-sm hover:from-indigo-500 hover:to-indigo-400 transition-all duration-300 relative group" style={{ height: `${h}%` }}>
+                                             <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 border border-white/10 text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-20 shadow-xl">
+                                                 Session: {h * 12}
+                                             </div>
+                                        </div>
+                                    ))}
+                                </div>
+                                
+                                {/* Realistic Graph Line Overlay */}
+                                <div className="absolute bottom-8 left-8 right-8 top-20 pointer-events-none">
+                                     <svg className="w-full h-full" preserveAspectRatio="none">
+                                         <path 
+                                            d="M0,80 C20,70 40,90 60,60 C80,30 100,50 120,20 C140,10 160,40 180,30 C200,20 220,10 240,50 C260,80 280,60 300,40"
+                                            fill="none"
+                                            stroke="#fbbf24"
+                                            strokeWidth="3"
+                                            className="drop-shadow-[0_0_10px_rgba(251,191,36,0.5)]"
+                                            strokeLinecap="round"
+                                         />
+                                     </svg>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                {/* Floating Elements for Depth */}
+                <div className="absolute top-24 -right-8 bg-[#1e293b] border border-white/10 p-4 rounded-xl shadow-2xl flex items-center space-x-3 animate-[pulse_6s_infinite] max-w-xs z-20">
+                    <div className="w-3 h-3 rounded-full bg-green-500 shadow-[0_0_10px_#22c55e]"></div>
+                    <div>
+                        <div className="text-xs text-white font-bold">New Connection</div>
+                        <div className="text-xs text-slate-400">Salesforce CRM connected successfully</div>
+                    </div>
+                </div>
+
+                 <div className="absolute bottom-24 -left-8 bg-[#1e293b] border border-white/10 p-4 rounded-xl shadow-2xl flex items-center space-x-3 max-w-xs z-20">
+                    <div className="w-10 h-10 rounded-full bg-indigo-500 flex items-center justify-center text-white border-2 border-[#1e293b] ring-2 ring-indigo-500/50"><User className="w-5 h-5"/></div>
+                    <div>
+                        <div className="text-xs text-white font-bold">Agent Sarah</div>
+                        <div className="text-xs text-indigo-300">Processing loan application #8821...</div>
+                    </div>
+                </div>
+
+             </div>
+          </div>
         </div>
       </div>
     </div>

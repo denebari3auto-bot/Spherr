@@ -42,4 +42,9 @@ export enum GeminiModel {
   FLASH = 'gemini-2.5-flash',
 }
 
-export type ViewState = 'home' | { type: 'product', productId: string };
+export type ViewState = 
+  | 'home' 
+  | 'solutions'
+  | 'integrations'
+  | { type: 'product', productId: string }
+  | { type: 'legal', doc: 'privacy' | 'terms' | 'cookie' | 'security' | 'compliance' };

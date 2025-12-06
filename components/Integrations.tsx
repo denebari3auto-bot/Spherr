@@ -1,114 +1,191 @@
 import React from 'react';
-import { Database, Server, Smartphone, Globe, Cpu, Zap } from 'lucide-react';
+import { Database, Server, Cpu, Zap, ArrowRight, Activity, Layers } from 'lucide-react';
 import { Button } from './Button';
 
 export const Integrations: React.FC = () => {
   return (
-    <section id="integrations" className="py-24 bg-slate-900 border-t border-slate-800">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="integrations" className="py-24 bg-slate-900 border-t border-slate-800 relative overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-indigo-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+      <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-purple-600/5 rounded-full blur-[120px] pointer-events-none"></div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 mb-20">
-            {/* Left: Text & CTA */}
-            <div className="flex flex-col justify-center">
-                <h2 className="text-indigo-400 font-semibold tracking-wide uppercase text-sm mb-2">Integration Ecosystem</h2>
-                <h3 className="text-4xl font-bold text-white mb-6">
-                    Connects with <span className="gradient-text">Everything</span>
-                </h3>
-                <p className="text-slate-400 text-lg mb-8 leading-relaxed">
-                    Our platform is designed to introduce new and existing systems seamlessly. 
-                    From legacy ERPs to modern cloud applications, Spherr acts as the intelligent glue 
-                    that binds your operations together.
-                </p>
-                <div className="bg-slate-800/50 p-6 rounded-xl border border-slate-700 mb-8">
-                    <h4 className="text-white font-semibold mb-2 flex items-center">
-                        <Zap className="h-5 w-5 text-yellow-500 mr-2" /> Scalable Operations
-                    </h4>
-                    <p className="text-sm text-slate-400">
-                        Watch your capacity grow without increasing headcount. Our integration layer handles millions of requests daily.
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-20">
+          <div className="inline-flex items-center space-x-2 bg-slate-800/50 rounded-full px-3 py-1 mb-4 border border-slate-700">
+             <Layers className="w-4 h-4 text-indigo-400" />
+             <span className="text-xs font-medium text-indigo-300 uppercase tracking-wide">Unified Ecosystem</span>
+          </div>
+          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 tracking-tight">
+             Seamlessly <span className="gradient-text">Connected</span>
+          </h2>
+          <p className="text-lg text-slate-400 leading-relaxed">
+            Spherr acts as the intelligent neural network of your enterprise. We don't just connect apps; 
+            we orchestrate complex logic between your legacy systems and modern cloud infrastructure.
+          </p>
+        </div>
+
+        {/* Feature Cards - Simultaneous Display */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-24">
+            
+            {/* Card 1: Enterprise Automation Demo */}
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden hover:border-indigo-500/30 transition-all duration-300 group shadow-2xl flex flex-col">
+                <div className="p-8 border-b border-slate-800/50">
+                    <div className="flex items-center space-x-3 mb-4">
+                        <div className="p-2 bg-blue-500/10 rounded-lg">
+                            <Cpu className="w-6 h-6 text-blue-400" />
+                        </div>
+                        <h3 className="text-xl font-bold text-white">Enterprise Automation</h3>
+                    </div>
+                    <p className="text-slate-400 text-sm">
+                        Watch data flow intelligently from source to execution. Our engine handles transformation, logic, and delivery in milliseconds.
                     </p>
                 </div>
-                <div>
-                    <Button variant="glow" size="lg" className="w-full sm:w-auto">
-                        Explore Integration Library
-                    </Button>
+                
+                {/* Visual Demo Area */}
+                <div className="h-64 bg-slate-900/50 relative p-6 flex flex-col justify-center items-center flex-grow">
+                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                    
+                    {/* Automation Flow */}
+                    <div className="flex items-center justify-between w-full max-w-md relative z-10 px-4">
+                        {/* Node 1 */}
+                        <div className="flex flex-col items-center space-y-2 relative group-hover:animate-pulse">
+                            <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center relative shadow-lg">
+                                <Database className="w-5 h-5 text-slate-400" />
+                                <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-500 rounded-full border-2 border-slate-800 animate-ping"></div>
+                            </div>
+                            <span className="text-[10px] text-slate-500 font-mono uppercase">Source</span>
+                        </div>
+
+                        {/* Animated Path 1 */}
+                        <div className="flex-1 h-0.5 bg-slate-800 mx-2 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-blue-500 to-transparent w-1/2 animate-[shimmer_2s_infinite]"></div>
+                        </div>
+
+                        {/* Node 2 (Central AI) */}
+                        <div className="flex flex-col items-center space-y-2 relative">
+                             <div className="w-16 h-16 rounded-2xl bg-indigo-600/10 border border-indigo-500/50 flex items-center justify-center shadow-[0_0_30px_rgba(79,70,229,0.15)] relative">
+                                <Activity className="w-8 h-8 text-indigo-400 animate-[pulse_3s_ease-in-out_infinite]" />
+                                <div className="absolute inset-0 border border-indigo-500/30 rounded-2xl animate-ping opacity-20"></div>
+                            </div>
+                            <span className="text-[10px] text-indigo-400 font-mono uppercase font-bold">Spherr Core</span>
+                        </div>
+
+                         {/* Animated Path 2 */}
+                         <div className="flex-1 h-0.5 bg-slate-800 mx-2 relative overflow-hidden">
+                            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-purple-500 to-transparent w-1/2 animate-[shimmer_2s_infinite_0.5s]"></div>
+                        </div>
+
+                        {/* Node 3 */}
+                        <div className="flex flex-col items-center space-y-2 relative group-hover:animate-pulse">
+                            <div className="w-12 h-12 rounded-xl bg-slate-800 border border-slate-700 flex items-center justify-center shadow-lg">
+                                <Server className="w-5 h-5 text-slate-400" />
+                            </div>
+                            <span className="text-[10px] text-slate-500 font-mono uppercase">Target</span>
+                        </div>
+                    </div>
+
+                    <div className="mt-8 flex items-center space-x-2 bg-black/40 px-3 py-1 rounded-full backdrop-blur-sm border border-white/5">
+                        <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></div>
+                        <span className="text-xs text-slate-400 font-mono">Status: Processing 14,203 events/sec</span>
+                    </div>
                 </div>
             </div>
 
-            {/* Right: Visual Demo of Automation */}
-            <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-indigo-500/20 to-purple-500/20 rounded-xl blur-xl"></div>
-                <div className="relative bg-slate-950 border border-slate-800 rounded-xl overflow-hidden shadow-2xl">
-                    <div className="bg-slate-900 border-b border-slate-800 p-4 flex justify-between items-center">
-                        <span className="text-xs font-mono text-slate-500">pipeline_v2.json</span>
-                        <div className="flex space-x-1">
-                            <div className="w-2 h-2 bg-slate-700 rounded-full"></div>
-                            <div className="w-2 h-2 bg-slate-700 rounded-full"></div>
+            {/* Card 2: Scalable Operations Demo */}
+            <div className="bg-slate-950 border border-slate-800 rounded-2xl overflow-hidden hover:border-purple-500/30 transition-all duration-300 group shadow-2xl flex flex-col">
+                 <div className="p-8 border-b border-slate-800/50">
+                    <div className="flex items-center space-x-3 mb-4">
+                         <div className="p-2 bg-purple-500/10 rounded-lg">
+                            <Zap className="w-6 h-6 text-purple-400" />
                         </div>
+                        <h3 className="text-xl font-bold text-white">Scalable Operations</h3>
                     </div>
-                    
-                    {/* Flow Diagram Visual */}
-                    <div className="p-8 relative h-[400px] flex flex-col justify-between items-center">
-                        {/* Top Node */}
-                        <div className="glass-panel p-4 rounded-lg flex items-center space-x-3 w-48 animate-pulse">
-                            <Database className="h-5 w-5 text-blue-400" />
-                            <div>
-                                <div className="text-xs text-slate-400">Source</div>
-                                <div className="text-sm text-white font-medium">ERP Data</div>
-                            </div>
-                        </div>
-
-                        {/* Connection Line */}
-                        <div className="h-12 w-0.5 bg-slate-700 relative">
-                            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-1.5 h-3 bg-indigo-500 rounded-full animate-[slideUp_1s_infinite]"></div>
-                        </div>
-
-                        {/* Middle Node */}
-                        <div className="glass-panel p-4 rounded-lg flex items-center space-x-3 w-56 border-indigo-500/50 border">
-                            <Cpu className="h-5 w-5 text-indigo-400" />
-                            <div>
-                                <div className="text-xs text-slate-400">Processing</div>
-                                <div className="text-sm text-white font-medium">Spherr AI Engine</div>
-                            </div>
-                        </div>
-
-                        {/* Connection Line Split */}
-                        <div className="h-12 w-full flex justify-center relative">
-                             <div className="w-0.5 h-full bg-slate-700 mx-auto"></div>
-                             <div className="absolute w-32 h-0.5 bg-slate-700 bottom-0"></div> {/* Horizontal split */}
-                             <div className="absolute left-1/2 -translate-x-1/2 w-1.5 h-3 bg-indigo-500 rounded-full animate-[slideUp_1s_infinite]"></div>
-                        </div>
-
-                        {/* Bottom Nodes */}
-                        <div className="flex justify-between w-full px-4">
-                            <div className="glass-panel p-3 rounded-lg w-32 flex flex-col items-center text-center">
-                                <Server className="h-4 w-4 text-green-400 mb-2" />
-                                <span className="text-xs text-white">CRM Update</span>
-                            </div>
-                            <div className="glass-panel p-3 rounded-lg w-32 flex flex-col items-center text-center">
-                                <Smartphone className="h-4 w-4 text-pink-400 mb-2" />
-                                <span className="text-xs text-white">Notify App</span>
-                            </div>
-                             <div className="glass-panel p-3 rounded-lg w-32 flex flex-col items-center text-center">
-                                <Globe className="h-4 w-4 text-cyan-400 mb-2" />
-                                <span className="text-xs text-white">Webhook</span>
-                            </div>
-                        </div>
-                    </div>
+                    <p className="text-slate-400 text-sm">
+                        Built for hyper-growth. Our infrastructure auto-scales to handle traffic spikes without compromising latency or security.
+                    </p>
                 </div>
+
+                {/* Visual Demo Area - Improved SVG Graph */}
+                 <div className="h-64 bg-slate-900/50 relative p-6 flex items-end justify-center w-full flex-grow">
+                     <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+                     
+                     <div className="w-full h-full relative z-10 flex items-end px-2 pb-4">
+                        {/* SVG Graph for smoothness */}
+                        <svg className="w-full h-full overflow-visible" viewBox="0 0 100 50" preserveAspectRatio="none">
+                            {/* Grid Lines */}
+                            <line x1="0" y1="10" x2="100" y2="10" stroke="#334155" strokeWidth="0.1" strokeDasharray="2" />
+                            <line x1="0" y1="30" x2="100" y2="30" stroke="#334155" strokeWidth="0.1" strokeDasharray="2" />
+
+                            {/* Area Fill */}
+                            <path 
+                                d="M0 50 L0 35 Q10 20 20 35 T40 30 T60 15 T80 25 T100 5 V50 Z" 
+                                fill="url(#purpleGradient)" 
+                                className="opacity-50"
+                            />
+                            
+                            {/* Line */}
+                            <path 
+                                d="M0 35 Q10 20 20 35 T40 30 T60 15 T80 25 T100 5" 
+                                fill="none" 
+                                stroke="#a855f7" 
+                                strokeWidth="0.8"
+                                vectorEffect="non-scaling-stroke"
+                                className="drop-shadow-[0_0_8px_rgba(168,85,247,0.5)]"
+                            >
+                                <animate attributeName="d" 
+                                    values="M0 35 Q10 20 20 35 T40 30 T60 15 T80 25 T100 5; M0 38 Q10 25 20 32 T40 35 T60 18 T80 22 T100 8; M0 35 Q10 20 20 35 T40 30 T60 15 T80 25 T100 5" 
+                                    dur="5s" 
+                                    repeatCount="indefinite" 
+                                />
+                            </path>
+
+                             <defs>
+                                <linearGradient id="purpleGradient" x1="0" y1="0" x2="0" y2="1">
+                                    <stop offset="0%" stopColor="#a855f7" stopOpacity="0.4" />
+                                    <stop offset="100%" stopColor="#a855f7" stopOpacity="0" />
+                                </linearGradient>
+                            </defs>
+                        </svg>
+
+                        {/* Animated Data Points */}
+                        <div className="absolute top-[20%] left-[60%] w-2 h-2 bg-white rounded-full animate-ping"></div>
+                        <div className="absolute top-[10%] right-[0%] w-2 h-2 bg-purple-400 rounded-full shadow-[0_0_10px_#a855f7]"></div>
+                     </div>
+                     
+                     {/* Floating Stats Overlay */}
+                     <div className="absolute top-4 left-4 right-4 flex justify-between">
+                         <div className="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-3 py-2 shadow-lg flex flex-col">
+                             <span className="text-[10px] text-slate-400 uppercase font-bold">Requests</span>
+                             <span className="text-lg font-bold text-white leading-none">2.4M</span>
+                         </div>
+                         <div className="bg-slate-800/80 backdrop-blur border border-slate-700 rounded-lg px-3 py-2 shadow-lg flex flex-col items-end">
+                             <span className="text-[10px] text-slate-400 uppercase font-bold">Uptime</span>
+                             <span className="text-lg font-bold text-green-400 leading-none">99.99%</span>
+                         </div>
+                     </div>
+                 </div>
             </div>
         </div>
 
-        {/* Tools Grid */}
-        <div className="border-t border-slate-800 pt-16">
-            <p className="text-center text-slate-500 mb-8 text-sm">Compatible with industry standards</p>
-            <div className="flex flex-wrap justify-center gap-8 md:gap-16 opacity-70 grayscale hover:grayscale-0 transition-all duration-500">
-               {/* Placeholders for logos, using text/icons for prototype */}
-               <div className="flex items-center space-x-2 text-xl font-bold text-white"><span className="text-blue-500">Salesforce</span></div>
-               <div className="flex items-center space-x-2 text-xl font-bold text-white"><span className="text-orange-500">HubSpot</span></div>
-               <div className="flex items-center space-x-2 text-xl font-bold text-white"><span className="text-green-500">Slack</span></div>
-               <div className="flex items-center space-x-2 text-xl font-bold text-white"><span className="text-purple-500">Teams</span></div>
-               <div className="flex items-center space-x-2 text-xl font-bold text-white"><span className="text-sky-500">Jira</span></div>
-            </div>
+        {/* Binding CTA Footer */}
+        <div className="bg-gradient-to-r from-indigo-900/50 to-purple-900/50 rounded-3xl border border-indigo-500/20 p-8 md:p-12 text-center relative overflow-hidden shadow-2xl">
+             <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
+             <div className="relative z-10">
+                <h3 className="text-3xl font-bold text-white mb-4">Ready to unify your entire stack?</h3>
+                <p className="text-indigo-200 max-w-2xl mx-auto mb-8 text-lg">
+                    Stop building digital silos. Start orchestrating your business intelligence with the only platform designed for total integration.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
+                    <Button variant="glow" size="lg">
+                        Contact Sales <ArrowRight className="ml-2 w-5 h-5" />
+                    </Button>
+                    <Button variant="outline" size="lg" className="border-indigo-500/30 hover:bg-indigo-500/10 hover:text-white">
+                        Request Demo
+                    </Button>
+                </div>
+             </div>
         </div>
 
       </div>
