@@ -51,16 +51,16 @@ export const Header: React.FC<HeaderProps> = ({ onRequestDemo, onNavigate }) => 
   return (
     <header className={`fixed w-full top-0 z-50 transition-all duration-300 ${scrolled ? 'bg-slate-950/95 backdrop-blur-xl border-b border-white/5 shadow-2xl' : 'bg-transparent'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Increased header height to accommodate larger logo */}
-        <div className="flex justify-between items-center h-28 md:h-36 transition-all duration-300">
+        {/* Responsive Header Height: Compact on mobile, Bold on Desktop */}
+        <div className="flex justify-between items-center h-20 md:h-44 transition-all duration-300">
           <div className="flex items-center">
             <a href="#" className="flex items-center group relative z-20" onClick={(e) => handleNav('home', e)}>
-              {/* Bold, Visible, Standard Logo */}
+              {/* Responsive Logo: h-12 on mobile, h-40 on desktop */}
               <div className="relative">
                 <img 
                   src="https://i.imgur.com/KKd9RjR.png" 
                   alt="Spherr Logo" 
-                  className="h-24 md:h-32 w-auto object-contain transition-transform duration-300 hover:scale-105 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
+                  className="h-12 md:h-40 w-auto object-contain transition-transform duration-300 hover:scale-105 filter drop-shadow-[0_0_15px_rgba(255,255,255,0.1)]" 
                 />
               </div>
             </a>
@@ -87,7 +87,7 @@ export const Header: React.FC<HeaderProps> = ({ onRequestDemo, onNavigate }) => 
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               className="p-2 text-slate-300 hover:text-white focus:outline-none bg-white/5 rounded-lg border border-white/10"
             >
-              {isMenuOpen ? <X className="h-7 w-7" /> : <Menu className="h-7 w-7" />}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -97,11 +97,11 @@ export const Header: React.FC<HeaderProps> = ({ onRequestDemo, onNavigate }) => 
       {isMenuOpen && (
         <div className="md:hidden bg-slate-950/95 backdrop-blur-xl border-b border-slate-800 absolute w-full shadow-2xl animate-slide-up">
           <div className="px-4 pt-4 pb-6 space-y-2">
-             <button onClick={(e) => handleNav('solutions', e)} className="block w-full text-left px-4 py-3 rounded-xl text-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all border border-transparent hover:border-white/10">Solutions</button>
-            <button onClick={(e) => handleNav('#industries', e)} className="block w-full text-left px-4 py-3 rounded-xl text-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all border border-transparent hover:border-white/10">Industries</button>
-            <button onClick={(e) => handleNav('integrations', e)} className="block w-full text-left px-4 py-3 rounded-xl text-lg font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all border border-transparent hover:border-white/10">Integrations</button>
+             <button onClick={(e) => handleNav('solutions', e)} className="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all border border-transparent hover:border-white/10">Solutions</button>
+            <button onClick={(e) => handleNav('#industries', e)} className="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all border border-transparent hover:border-white/10">Industries</button>
+            <button onClick={(e) => handleNav('integrations', e)} className="block w-full text-left px-4 py-3 rounded-xl text-base font-medium text-slate-300 hover:text-white hover:bg-white/5 transition-all border border-transparent hover:border-white/10">Integrations</button>
             <div className="pt-4 px-2">
-              <Button className="w-full bg-gold-400 text-slate-950 font-bold py-4 text-lg shadow-lg shadow-gold-500/20" onClick={onRequestDemo}>Request Demo</Button>
+              <Button className="w-full bg-gold-400 text-slate-950 font-bold py-3 text-base shadow-lg shadow-gold-500/20" onClick={onRequestDemo}>Request Demo</Button>
             </div>
           </div>
         </div>

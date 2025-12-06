@@ -25,7 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => 
   ];
 
   return (
-    <div className="relative pt-32 pb-24 overflow-hidden bg-[#050b1a] min-h-[90vh] flex flex-col justify-center">
+    <div className="relative pt-28 md:pt-52 pb-16 md:pb-24 overflow-hidden bg-[#050b1a] min-h-[90vh] flex flex-col justify-center">
       {/* Enterprise System Background - No Blur */}
       <div className="absolute inset-0 z-0">
           <img 
@@ -37,16 +37,16 @@ export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => 
       </div>
 
       {/* Bright & Calming Gradients */}
-      <div className="absolute top-0 left-1/4 w-[800px] h-[800px] bg-indigo-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen z-0"></div>
-      <div className="absolute bottom-0 right-1/4 w-[800px] h-[800px] bg-gold-500/10 rounded-full blur-[120px] pointer-events-none mix-blend-screen z-0"></div>
+      <div className="absolute top-0 left-1/4 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-indigo-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none mix-blend-screen z-0"></div>
+      <div className="absolute bottom-0 right-1/4 w-[500px] md:w-[800px] h-[500px] md:h-[800px] bg-gold-500/10 rounded-full blur-[80px] md:blur-[120px] pointer-events-none mix-blend-screen z-0"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           
           {/* Text Content */}
-          <div className="space-y-8 animate-fade-in text-center lg:text-left">
+          <div className="space-y-6 md:space-y-8 animate-fade-in text-center lg:text-left">
             
-            <h1 className="text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-2xl">
+            <h1 className="text-4xl sm:text-5xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] drop-shadow-2xl">
               Automation <br/>
               <span className="block mt-2 h-auto">
                 {taglineWords.map((word, index) => (
@@ -54,23 +54,23 @@ export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => 
                     key={index} 
                     className={`transition-all duration-700 inline-block ${visibleWords > index ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
                   >
-                    {word.prefix && <span className="text-white mr-2">{word.prefix}</span>}
+                    {word.prefix && <span className="text-white mr-1 md:mr-2">{word.prefix}</span>}
                     <span className={word.color}>{word.text}</span>
-                    <span className="text-white mr-2">{word.suffix}</span>
+                    <span className="text-white mr-1 md:mr-2">{word.suffix}</span>
                   </span>
                 ))}
               </span>
             </h1>
             
-            <p className="text-xl text-slate-300 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
+            <p className="text-lg md:text-xl text-slate-300 leading-relaxed max-w-lg mx-auto lg:mx-0 font-medium">
               The market leader in AI-powered business automation. 
               Build custom AI agents, streamline workflows, and visualize your entire enterprise in one unified ecosystem.
             </p>
             
-            <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 justify-center lg:justify-start">
+            <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button 
                 size="lg" 
-                className="bg-gold-400 text-slate-950 hover:bg-gold-500 border-none font-bold shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all hover:scale-105"
+                className="bg-gold-400 text-slate-950 hover:bg-gold-500 border-none font-bold shadow-[0_0_20px_rgba(251,191,36,0.3)] transition-all hover:scale-105 w-full sm:w-auto"
                 onClick={onRequestDemo}
               >
                 Request Demo <ArrowRight className="ml-2 h-5 w-5" />
@@ -78,7 +78,7 @@ export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => 
               <Button 
                 variant="secondary" 
                 size="lg" 
-                className="bg-white/5 backdrop-blur-md text-white border-white/10 hover:bg-white/10 font-semibold"
+                className="bg-white/5 backdrop-blur-md text-white border-white/10 hover:bg-white/10 font-semibold w-full sm:w-auto"
                 onClick={onContactSales}
               >
                 Contact Sales
@@ -86,7 +86,7 @@ export const Hero: React.FC<HeroProps> = ({ onRequestDemo, onContactSales }) => 
             </div>
             
             {/* Tech Stack Hints */}
-            <div className="pt-8 flex items-center justify-center lg:justify-start space-x-8 text-slate-400 text-sm font-semibold">
+            <div className="pt-6 md:pt-8 flex flex-wrap items-center justify-center lg:justify-start gap-4 md:gap-8 text-slate-400 text-sm font-semibold">
                 <span className="flex items-center hover:text-indigo-400 transition-colors cursor-default"><Terminal className="w-4 h-4 mr-2" /> API First</span>
                 <span className="flex items-center hover:text-green-400 transition-colors cursor-default"><Shield className="w-4 h-4 mr-2" /> SOC2 Secure</span>
                 <span className="flex items-center hover:text-blue-400 transition-colors cursor-default"><Globe className="w-4 h-4 mr-2" /> Global Scale</span>
