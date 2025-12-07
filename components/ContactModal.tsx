@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { X, Send, Loader2, CheckCircle2 } from 'lucide-react';
-import { supabase } from '../lib/supabase';
 import { Button } from './Button';
 
 interface ContactModalProps {
@@ -25,32 +24,16 @@ export const ContactModal: React.FC<ContactModalProps> = ({ isOpen, onClose, typ
     setLoading(true);
     setStatus('idle');
 
-    try {
-      // Insert into 'leads' table in Supabase
-      const { error } = await supabase
-        .from('leads')
-        .insert([
-          { 
-            name: formData.name, 
-            email: formData.email, 
-            message: formData.message,
-            type: type
-          }
-        ]);
-
-      if (error) throw error;
-      setStatus('success');
-      setTimeout(() => {
-        onClose();
-        setStatus('idle');
-        setFormData({ name: '', email: '', message: '' });
-      }, 2000);
-    } catch (error) {
-      console.error('Error submitting form:', error);
-      setStatus('error');
-    } finally {
-      setLoading(false);
-    }
+    // Simulated API call since Supabase is removed
+    setTimeout(() => {
+        setStatus('success');
+        setLoading(false);
+        setTimeout(() => {
+            onClose();
+            setStatus('idle');
+            setFormData({ name: '', email: '', message: '' });
+        }, 2000);
+    }, 1500);
   };
 
   return (

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Calendar, MessageSquare, ArrowRight, Loader2, Check } from 'lucide-react';
 import { products } from '../data/products';
 import { ViewState } from '../types';
-import { supabase } from '../lib/supabase';
 
 interface FooterProps {
   onProductSelect: (id: string) => void;
@@ -26,18 +25,13 @@ export const Footer: React.FC<FooterProps> = ({
   const handleSubscribe = async () => {
       if (!email || !email.includes('@')) return;
       setSubscribing(true);
-      try {
-          // Insert into 'subscribers' table in Supabase
-          const { error } = await supabase.from('subscribers').insert([{ email }]);
-          if (error) throw error;
+      
+      // Simulated API call since Supabase is removed
+      setTimeout(() => {
           setSubscribed(true);
           setEmail('');
-      } catch (err) {
-          console.error("Subscription failed:", err);
-          // Optional: Handle error UI
-      } finally {
           setSubscribing(false);
-      }
+      }, 1000);
   };
 
   return (

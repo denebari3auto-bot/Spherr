@@ -1,4 +1,4 @@
-import React, { useState, Suspense, lazy } from 'react';
+import React, { useState, Suspense, lazy, useEffect } from 'react';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { Products } from './components/Products';
@@ -28,6 +28,10 @@ const App: React.FC = () => {
   const [view, setView] = useState<ViewState>('home');
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [contactType, setContactType] = useState<'demo' | 'sales'>('demo');
+
+  useEffect(() => {
+    console.log("Spherr App Mounted - v1.2");
+  }, []);
 
   const handleProductSelect = (id: string) => {
     setView({ type: 'product', productId: id });
