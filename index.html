@@ -123,17 +123,6 @@
         backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 255, 255, 0.08);
       }
-      /* Loader for initial mount */
-      #app-loader {
-        position: fixed;
-        top: 0; left: 0; width: 100%; height: 100%;
-        background-color: #050b1a;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-        transition: opacity 0.3s ease-out;
-      }
     </style>
   <script type="importmap">
 {
@@ -150,10 +139,6 @@
 </head>
   <body>
     <div id="root"></div>
-    <div id="app-loader">
-       <div style="width: 40px; height: 40px; border: 3px solid #1e293b; border-top-color: #fbbf24; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-       <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
-    </div>
     <script type="module" src="./index.tsx"></script>
   </body>
 </html>

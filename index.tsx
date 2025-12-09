@@ -4,21 +4,6 @@ import App from './App';
 
 console.log("Initializing Spherr Website...");
 
-// Global error handler for module loading failures
-window.addEventListener('error', (event) => {
-    // Only show error if site hasn't mounted yet
-    const loader = document.getElementById('app-loader');
-    if (loader && loader.style.opacity !== '0') {
-        loader.innerHTML = `
-            <div style="color: #ef4444; text-align: center; font-family: sans-serif; padding: 20px;">
-                <h3 style="margin-bottom:8px">Loading Error</h3>
-                <p style="font-size: 12px; color: #94a3b8; margin-bottom: 16px;">${event.message}</p>
-                <button onclick="window.location.reload()" style="padding: 8px 16px; background: #fbbf24; color: black; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;">Reload Page</button>
-            </div>
-        `;
-    }
-});
-
 const rootElement = document.getElementById('root');
 
 if (!rootElement) {
@@ -37,8 +22,6 @@ try {
   console.log("React Mount Successful");
 } catch (error: any) {
   console.error("CRITICAL MOUNT ERROR:", error);
-  const loader = document.getElementById('app-loader');
-  if (loader) loader.remove();
   
   rootElement.innerHTML = `
     <div style="min-h-screen flex flex-col items-center justify-center bg-slate-950 text-white p-8 text-center font-sans">
