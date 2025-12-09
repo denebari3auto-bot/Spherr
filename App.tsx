@@ -5,6 +5,7 @@ import { Products } from './components/Products';
 import { Industries } from './components/Industries';
 import { Integrations } from './components/Integrations';
 import { Testimonials } from './components/Testimonials';
+import { Partners } from './components/Partners';
 import { Footer } from './components/Footer';
 import { ViewState } from './types';
 import { products } from './data/products';
@@ -30,7 +31,12 @@ const App: React.FC = () => {
   const [contactType, setContactType] = useState<'demo' | 'sales'>('demo');
 
   useEffect(() => {
-    console.log("Spherr App Mounted - v1.2");
+    // Remove the initial HTML loader once React has picked up
+    const loader = document.getElementById('app-loader');
+    if (loader) {
+      loader.style.opacity = '0';
+      setTimeout(() => loader.remove(), 500);
+    }
   }, []);
 
   const handleProductSelect = (id: string) => {
@@ -54,13 +60,13 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050b1a] text-white selection:bg-gold-500/30">
+    <div className="min-h-screen bg-[#050b1a] text-white selection:bg-gold-500/30 font-sans">
       <Header 
         onRequestDemo={() => openContactModal('demo')} 
         onNavigate={handleNavigate}
       />
       
-      <main>
+      <main className="relative z-0">
         <Suspense fallback={<PageLoader />}>
           {view === 'home' && (
             <>
@@ -68,6 +74,7 @@ const App: React.FC = () => {
                 onRequestDemo={() => openContactModal('demo')}
                 onContactSales={() => openContactModal('sales')}
               />
+              <Partners />
               <Products onProductSelect={handleProductSelect} />
               <Industries />
               <Integrations />
